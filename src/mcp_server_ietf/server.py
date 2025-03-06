@@ -56,7 +56,9 @@ mcp = FastMCP("mcp-server-ietf", lifespan=server_lifespan,
 
 @mcp.tool()
 def list_ietf_docs_number(ctx: Context) -> int:
-    """Get the total number of RFC documents available"""
+    """
+    Get the total number of IETF RFC documents available in RFC editor Index
+    """
     server_ctx = ctx.request_context.lifespan_context
     logger.debug(f"doc count:{server_ctx.docs_count}")
     return server_ctx.docs_count
@@ -69,7 +71,7 @@ async def get_ietf_doc(
     max_lines: int = DEFAULT_MAX_LINES,
 ) -> Dict[str, Any]:
     """
-    Get an IETF RFC document by its number with pagination support
+    Get an RFC document by its number in RFC editor Index with pagination support
 
     Args:
         number: The RFC number str (e.g., "1234")
@@ -91,7 +93,7 @@ async def get_ietf_doc(
 @mcp.tool()
 def search_ietf_rfc_by_keyword(keyword: str, ctx: Context) -> List[Dict[str, str]]:
     """
-    Search for RFC documents by keyword in their titles
+    Search for IETF RFC documents from RFC Editor Index by keyword in their titles
 
     Args:
         keyword: The keyword to search for
@@ -113,7 +115,7 @@ def search_ietf_rfc_by_keyword(keyword: str, ctx: Context) -> List[Dict[str, str
     return results
 
 def serve():
-    print(f"Starting IETF-doc-server. Cache directory: {CACHE_DIR}")
+    print(f"Starting mcp-server-ietf. Cache directory: {CACHE_DIR}")
     logger.info(f"Logging to: {log_file}")
     mcp.run()
 
