@@ -55,21 +55,21 @@ mcp = FastMCP("mcp-server-ietf", lifespan=server_lifespan,
               log_level = default_log_level)
 
 @mcp.tool()
-def list_docs_number(ctx: Context) -> int:
+def list_ietf_docs_number(ctx: Context) -> int:
     """Get the total number of RFC documents available"""
     server_ctx = ctx.request_context.lifespan_context
     logger.debug(f"doc count:{server_ctx.docs_count}")
     return server_ctx.docs_count
 
 @mcp.tool()
-async def get_doc(
+async def get_ietf_doc(
     ctx: Context,
     number: int,
     start_line: int = 1,
     max_lines: int = DEFAULT_MAX_LINES,
 ) -> Dict[str, Any]:
     """
-    Get an RFC document by its number with pagination support
+    Get an IETF RFC document by its number with pagination support
 
     Args:
         number: The RFC number str (e.g., "1234")
@@ -89,7 +89,7 @@ async def get_doc(
 
 
 @mcp.tool()
-def search_rfc_by_keyword(keyword: str, ctx: Context) -> List[Dict[str, str]]:
+def search_ietf_rfc_by_keyword(keyword: str, ctx: Context) -> List[Dict[str, str]]:
     """
     Search for RFC documents by keyword in their titles
 
