@@ -14,6 +14,7 @@ log_level = getattr(logging, default_log_level, logging.INFO)
 INDEX_URL = "https://www.rfc-editor.org/rfc-index.txt"
 RFC_URL_TEMPLATE = "https://www.rfc-editor.org/rfc/rfc{number}.txt"
 CACHE_DIR = os.path.expanduser("~/.cache/ietf-doc-server")
+os.makedirs(CACHE_DIR, exist_ok=True)
 DEFAULT_MAX_LINES = 200  # Default pagination limit
 
 log_file = os.path.join(CACHE_DIR, "mcp-server-ietf.log")
